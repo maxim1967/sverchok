@@ -610,7 +610,10 @@ def register_node_panels(identifier, std_menu):
 def unregister_node_panels():
     global node_panels
     for panel_type in reversed(node_panels):
-        bpy.utils.unregister_class(panel_type)
+        if panel_type and panel_type.is_registered:
+            # some third party plugins import several of Sverchok's custom functions to register/unregister their classes.
+            # this test avoids throwing an error that says the class is not registered ( and can't therefor be unregistered )
+            bpy.utils.unregister_class(panel_type)
     node_panels = []
 
 def reload_menu():
