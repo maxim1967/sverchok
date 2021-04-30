@@ -156,7 +156,7 @@ class SvBezierInLiteNode(Show3DProperties, bpy.types.Node, SverchCustomTreeNode,
                     socket.sv_set([curv_data[socket.name]])
                     
     def process(self):
-    
+        
         if not hash(self) in self.node_dict:
             if not self.obj_name:
                 return
